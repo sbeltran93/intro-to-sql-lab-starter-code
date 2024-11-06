@@ -1,26 +1,89 @@
 -- Clue #1: We recently got word that someone fitting Carmen Sandiego's description has been traveling through Southern Europe. She's most likely traveling someplace where she won't be noticed, so find the least populated country in Southern Europe, and we'll start looking for her there.
  
 -- Write SQL query here
+SELECT name FROM countries WHERE region = 'Southern Europe' ORDER BY population ASC;
+
+result = 
+Holy See (Vatican City State)
 
 
 -- Clue #2: Now that we're here, we have insight that Carmen was seen attending language classes in this country's officially recognized language. Check our databases and find out what language is spoken in this country, so we can call in a translator to work with you.
 
 -- Write SQL query here
+SELECT * FROM countries WHERE name = 'Holy See (Vatican City State)';
+language code = VAT
+SELECT * FROM countrylanguages WHERE countrycode = 'VAT';
+
+ countrycode | language | isofficial | percentage 
+-------------+----------+------------+------------
+ VAT         | Italian  | t          |          0
+
 
 
 -- Clue #3: We have new news on the classes Carmen attended – our gumshoes tell us she's moved on to a different country, a country where people speak only the language she was learning. Find out which nearby country speaks nothing but that language.
 
 -- Write SQL query here
+SELECT * from countrylanguages WHERE language = 'Italian' AND isofficial = 'T';
+ countrycode | language | isofficial | percentage 
+-------------+----------+------------+------------
+ CHE         | Italian  | t          |        7.7
+ ITA         | Italian  | t          |       94.1
+ SMR         | Italian  | t          |        100
+ VAT         | Italian  | t          |          0
+
+SELECT name FROM countries WHERE code = 'SMR';
+    name    
+------------
+ San Marino
+(1 row)
+
 
 
 -- Clue #4: We're booking the first flight out – maybe we've actually got a chance to catch her this time. There are only two cities she could be flying to in the country. One is named the same as the country – that would be too obvious. We're following our gut on this one; find out what other city in that country she might be flying to.
 
 -- Write SQL query here
 
+SELECT name FROM cities WHERE countrycode = 'SMR';
+    name    
+------------
+ Serravalle
+ San Marino
+
+
 
 -- Clue #5: Oh no, she pulled a switch – there are two cities with very similar names, but in totally different parts of the globe! She's headed to South America as we speak; go find a city whose name is like the one we were headed to, but doesn't end the same. Find out the city, and do another search for what country it's in. Hurry!
 
 -- Write SQL query here
+SELECT name FROM countries WHERE region = 'South America';
+       name       
+------------------
+ Argentina
+ Bolivia
+ Brazil
+ Chile
+ Colombia
+ Ecuador
+ Falkland Islands
+ French Guiana
+ Guyana
+ Peru
+ Paraguay
+ Suriname
+ Uruguay
+ Venezuela
+
+SELECT * FROM countries WHERE name = 'Suriname';
+ code |   name   |   continent   |    region     | surfacearea | indepyear | population | lifeexpectancy |  gnp   | 
+ SUR  | Suriname | South America | South America |      163265 |      1975 |     417000 |           71.4 | 870.00 |
+
+
+SELECT name FROM cities WHERE countrycode = 'SUR';
+    name    
+------------
+ Paramaribo
+
+
+I feel like i did this one wrong?^^
 
 
 -- Clue #6: We're close! Our South American agent says she just got a taxi at the airport, and is headed towards
