@@ -91,6 +91,11 @@ I feel like i did this one wrong?^^
 -- follow right behind you!
 
 -- Write SQL query here
+SELECT capital FROM countries WHERE name = 'Suriname';
+ capital 
+---------
+    3243
+
 
 
 -- Clue #7: She knows we're on to her – her taxi dropped her off at the international airport, and she beat us to the boarding gates. We have one chance to catch her, we just have to know where she's heading and beat her to the landing dock. Lucky for us, she's getting cocky. She left us a note (below), and I'm sure she thinks she's very clever, but if we can crack it, we can finally put her where she belongs – behind bars.
@@ -105,3 +110,8 @@ I feel like i did this one wrong?^^
 
 
 -- We're counting on you, gumshoe. Find out where she's headed, send us the info, and we'll be sure to meet her at the gates with bells on.
+
+SELECT name FROM cities Where population = 91084;
+     name     
+--------------
+ Santa Monica
